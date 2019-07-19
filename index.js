@@ -28,17 +28,17 @@ let notes = [
 ];
 
 //Etusivu
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("<h1>Hello World!</h1>");
 });
 
 //Kaikkien resurssien nouto, GET
-app.get("/notes", (req, res) => {
+app.get("/api/notes", (req, res) => {
   res.json(notes);
 });
 
 //Yksittäisen resurssin nouto, GET
-app.get("/notes/:id", (request, response) => {
+app.get("/api/notes/:id", (request, response) => {
   const id = Number(request.params.id);
   const note = notes.find(note => note.id === id);
 
@@ -51,7 +51,7 @@ app.get("/notes/:id", (request, response) => {
 });
 
 //Resurssin poisto, DELETE
-app.delete("/notes/:id", (request, response) => {
+app.delete("/api/notes/:id", (request, response) => {
   const id = Number(request.params.id);
   notes = notes.filter(note => note.id !== id);
 
@@ -65,7 +65,7 @@ const generateId = () => {
   return maxId + 1;
 };
 
-app.post("/notes", (request, response) => {
+app.post("/api/notes", (request, response) => {
   const body = request.body;
 
   if (!body.content) {
