@@ -1,0 +1,8 @@
+POST http://localhost:3001/notes/
+Content-Type: application/json
+//Rivi 2 ei saa olla tyhjä
+
+{
+"content":"VS Code is the best",
+"important": true
+}
