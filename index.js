@@ -13,11 +13,13 @@ app.get("/api/", (req, res) => {
   res.send("<h1>Hello World!</h1>");
 });
 
-//Kaikkien resurssien nouto, GET Muutettu mongoDB
-app.get("/api/notes", (request, response) => {
-  Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()));
-  });
+//Kaikkien resurssien nouto, GET
+app.get("/api/notes", (request, response, next) => {
+  Note.find({})
+    .then(notes => {
+      response.json(notes.map(note => note.toJSON()));
+    })
+    .catch(error => next(error));
 });
 
 //Yksittäisen resurssin nouto, GET
@@ -43,8 +45,7 @@ app.delete("/api/notes/:id", (request, response, next) => {
 });
 
 //Resurssin lisäys, POST
-
-app.post("/api/notes", (request, response) => {
+app.post("/api/notes", (request, response, next) => {
   const body = request.body;
 
   if (body.content === undefined) {
@@ -57,12 +58,16 @@ app.post("/api/notes", (request, response) => {
     date: new Date()
   });
 
-  note.save().then(savedNote => {
-    response.json(savedNote.toJSON());
-  });
+  note
+    .save()
+    .then(savedNote => savedNote.toJSON())
+    .then(savedAndFormattedNote => {
+      response.json(savedAndFormattedNote);
+    })
+    .catch(error => next(error));
 });
 
-// Resurssin päivitys
+// Resurssin päivitys, PUT
 app.put("/api/notes/:id", (request, response, next) => {
   const body = request.body;
 
@@ -95,12 +100,20 @@ const unknownEndpoint = (request, response) => {
 };
 app.use(unknownEndpoint);
 
-// virheellisten pyyntöjen käsittely
+// virheellisten pyyntöjen käsittely eli .catchit
 const errorHandler = (error, request, response, next) => {
   console.error(error.message);
+
   if (error.name === "CastError" && error.kind == "ObjectId") {
+    console.log("SYY: virheellinen id");
     return response.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    console.log("SYY: validation error");
+    return response.status(400).json({
+      error: error.message
+    });
   }
+
   next(error);
 };
 app.use(errorHandler);
