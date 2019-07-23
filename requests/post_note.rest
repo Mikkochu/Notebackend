@@ -3,6 +3,6 @@ Content-Type: application/json
 //Rivi 2 ei saa olla tyhjä
 
 {
-"content":"",
+"content":"m",
 "important": true
 }
