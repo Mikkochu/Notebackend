@@ -1,9 +1,11 @@
 POST http://localhost:3001/api/notes/
 Content-Type: application/json
-//Rivi 2 ei saa olla tyhjä
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikh1Z28iLCJpZCI6IjVkNDMwMGFhZDVhOGNhMzhkODk0N2ZkZSIsImlhdCI6MTU2NDY3MzczOH0.FOjlnTu0s6tfUrgfyiavQMayWCupBEmkYH8JYvT5kvE
 
 {
-"content":"Hugon pupumuistiinpano",
+"content":"Hugon pupumuistiinpano logattu tokenilla2",
 "important": true,
 "userId": "5d42ec2ed6e46325d0b41d21"
 }
+
+//Tulee olla token loginin.restista
