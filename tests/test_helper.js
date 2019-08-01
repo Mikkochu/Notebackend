@@ -12,6 +12,19 @@ const initialNotes = [
   }
 ];
 
+const initialUsers = [
+  {
+    username: "mikko",
+    name: "MikkoTestiKäyttäjä",
+    password: "secretpw"
+  },
+  {
+    username: "hugo",
+    name: "HugoTestiKäyttäjä",
+    password: "secretpw2"
+  }
+];
+
 const nonExistingId = async () => {
   const note = new Note({ content: "willremovethissoon" });
   await note.save();

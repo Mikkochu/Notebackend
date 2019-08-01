@@ -23,8 +23,10 @@ notesRouter.get("/:id", async (request, response, next) => {
 
 notesRouter.post("/", async (request, response, next) => {
   const body = request.body;
+  console.log("NotesBody", body); //Tämä on nyt newNote
 
-  const user = await User.findById(body.userId);
+  const user = await User.findById(body.userId); //Tämä on null
+  console.log("user", user);
 
   const note = new Note({
     content: body.content,
