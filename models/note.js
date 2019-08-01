@@ -1,5 +1,3 @@
-//Muistiinpanojen skeema, mongoDB
-
 const mongoose = require("mongoose");
 
 const noteSchema = new mongoose.Schema({
@@ -7,6 +5,10 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 5
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   },
   date: Date,
   important: Boolean

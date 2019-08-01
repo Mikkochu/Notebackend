@@ -3,6 +3,7 @@ Content-Type: application/json
 //Rivi 2 ei saa olla tyhjä
 
 {
-"content":"Wutang",
-"important": true
+"content":"Wu",
+"important": true,
+"userId": "5d400f2d1ed5ce0a3074444"
 }
