@@ -23,9 +23,9 @@ notesRouter.get("/:id", async (request, response, next) => {
 
 notesRouter.post("/", async (request, response, next) => {
   const body = request.body;
-  console.log("NotesBody", body); //Tämä on nyt newNote
+  console.log("NotesBody", body);
 
-  const user = await User.findById(body.userId); //Tämä on null
+  const user = await User.findById(body.userId);
   console.log("user", user);
 
   const note = new Note({

@@ -64,10 +64,23 @@ describe("when there is initially some notes saved", () => {
   });
 
   describe("addition of a new note", () => {
+    beforeEach(async () => {
+      await User.deleteMany({});
+      const user = new User({
+        username: "testikäyttäjä",
+        password: "salasana"
+      });
+      await user.save();
+    });
+
     test("succeeds with valid data", async () => {
+      const usersAtStart = await helper.usersInDb();
+      const testUserId = usersAtStart[0].id;
+
       const newNote = {
         content: "async/await simplifies making async calls",
-        important: true
+        important: true,
+        userId: testUserId
       };
 
       await api
@@ -84,8 +97,12 @@ describe("when there is initially some notes saved", () => {
     });
 
     test("fails with status code 400 if data invaild", async () => {
+      const usersAtStart = await helper.usersInDb();
+      const testUserId = usersAtStart[0].id;
+
       const newNote = {
-        important: true
+        important: true,
+        userId: testUserId
       };
 
       await api

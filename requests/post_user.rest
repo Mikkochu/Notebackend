@@ -2,9 +2,9 @@ POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-  "username": "MikkoPostdfd",
-  "name": "SuperuserMikko",
-  "password": "salainenSalasana"
+  "username": "Hugo",
+  "name": "SuperuserHugo",
+  "password": "salaSalasana"
 }
 
 
